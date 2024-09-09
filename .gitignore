@@ -1,0 +1,4 @@
+/node_modules
+/appLogs.log
+/package-lock.json
+/.env
