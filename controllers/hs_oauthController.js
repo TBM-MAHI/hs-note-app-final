@@ -3,8 +3,9 @@ const axios = require('axios');
 const qs = require('qs');
 const BASE_URL = "http://localhost:3500";
 const REDIRECT_URL = `${BASE_URL}/redirect`;
+const { insert_to_UserAuth_Collection } = require("../model/auth.model");
 let authData = {};
-
+let access_token_expired = false;
 const TokenHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 };
@@ -84,6 +85,7 @@ const getAccountInfo = async (accessToken) => {
         const result = await axios.get('https://api.hubapi.com/account-info/v3/details', { headers });
         //console.log(result.data);
         authData.portalid = result.data.portalId;
+        await insert_to_UserAuth_Collection(authData);
         return result.data;
     } catch (e) {
         logger.error(`Unable to retrieve account info: ${e.message}`);

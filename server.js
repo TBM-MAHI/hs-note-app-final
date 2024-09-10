@@ -3,6 +3,7 @@ const express = require('express');
 const path = require("path");
 const appRoutes = require('./routes/app.routes');
 const noteRoutes = require('./routes/note.routes');
+const {ConnectDB} =require('./utils/mongo.connection')
 const session = require('express-session');
 const logger = require('./utils/logger'); // Add logger
 
@@ -24,7 +25,15 @@ app.use(session({
 app.use('/', appRoutes);
 app.use('/note', noteRoutes);
 
-app.listen(PORT, () => {
-    logger.info(`Server is running on port ${PORT}`);
-    console.log(`URL : 👉 http://localhost:${PORT}/`);
-});
+
+
+async function loadDatabaseConnection() {
+    await ConnectDB();
+    app.listen(PORT, () => {
+        logger.info(`Server is running on port ${PORT}`);
+        console.log(`URL : 👉 http://localhost:${PORT}/`);
+    });
+    
+}
+
+loadDatabaseConnection();

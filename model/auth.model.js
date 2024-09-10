@@ -1,5 +1,5 @@
 const { authModel } = require('../model/auth.mongo');
-let access_token_expired = false;
+
 let insert_to_UserAuth_Collection = async (accData) => {
    /*  console.log(`=============== UPSERTING IN MONGO ===============`);
     console.log(accData); */
