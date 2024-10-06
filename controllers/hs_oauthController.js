@@ -65,7 +65,7 @@ const getAccessToken = async (req) => {
 function accessToken_Validity(authInfo) {
     let token_age = Date.now() - authInfo.token_timestamp;
     let token_lifetime = authInfo.expires_in * 1000;
-    // console.log("token_age->", token_age, "token_lifetime->", token_lifetime)
+    console.log("token_age (ms)->", token_age, "token_lifetime (ms)->", token_lifetime)
     if (token_age >= token_lifetime)
         access_token_expired = true;
     else
