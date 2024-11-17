@@ -61,7 +61,7 @@ const getAccessToken = async (req) => {
     return req.session.access_token;
 };
 
-///
+
 function accessToken_Validity(authInfo) {
     let token_age = Date.now() - authInfo.token_timestamp;
     let token_lifetime = authInfo.expires_in * 1000;
